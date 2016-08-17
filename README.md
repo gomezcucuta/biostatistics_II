@@ -9,3 +9,7 @@ dat <- read.csv("regrmult_v2.0.csv", row.names = 4)
 ### In order to change the column names
 
 colnames(dat) <- c("peso", "talla", "edad")
+
+### In order to create a scatter plot
+
+plot(peso ~ talla, dat)
