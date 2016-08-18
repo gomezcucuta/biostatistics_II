@@ -16,21 +16,9 @@ plot(peso ~ talla, dat, xlab = "Talla", ylab = "Peso")
 
 ### In order to perform the regression analysis
 
-lm(peso ~ talla, dat)
-
-summary(lm(peso ~ talla, dat))
-
-anova(lm(peso ~ talla, dat))
-
-confint(lm(peso ~ talla, dat), 'talla')
-
-new_dat <- data.frame(talla = 0)
-
-predict(lm(peso ~ talla, dat), new_dat, interval = "confidence")
-
-**OR**
-
 fit <- lm(peso ~ talla, dat)
+
+fit
 
 summary(fit)
 
@@ -41,3 +29,15 @@ confint(fit, 'talla')
 new_dat <- data.frame(talla = 0)
 
 predict(fit, new_dat, interval = "confidence")
+
+## In order to check the residuals
+
+names(fit)
+
+fit$residuals
+
+summary(fit$residuals)
+
+qqnorm(fit$residuals)
+
+plot(fit)
