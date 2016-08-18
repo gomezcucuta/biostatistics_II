@@ -12,7 +12,7 @@ colnames(dat) <- c("peso", "talla", "edad")
 
 ### In order to create a scatter plot
 
-plot(peso ~ talla, dat)
+plot(peso ~ talla, dat, xlab = "Talla", ylab = "Peso")
 
 ### In order to perform the regression analysis
 
