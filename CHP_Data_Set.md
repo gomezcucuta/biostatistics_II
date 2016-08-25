@@ -1,7 +1,7 @@
-# Working with the CHP.Rdata File
+# Working with the CHP.RData File
 
 ## In order to load the file
-load("CHP.Rdata")
+load("CHP.RData")
 
 ## In order to see what is contained in the dataset
 ls()
