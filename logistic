@@ -1,0 +1,17 @@
+load("CHP.RData")
+
+dat <- P323
+
+names(dat) <- c("Solvent", "Ret_Earnings", "Earnings_B", "Sales")
+
+head(dat)
+
+attach(dat)
+
+log_model1 <- glm(Solvent ~ Ret_Earnings + Earnings_B + Sales, binomial)
+
+summary(log_model1)
+
+anova(log_model1, test = "Chisq")
+
+confint.default(log_model1)
