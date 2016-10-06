@@ -1,5 +1,6 @@
 # HairEyeColor Dataset
 
+```{r}
 data(HairEyeColor)
 
 dat <- HairEyeColor
@@ -23,3 +24,4 @@ library(FactoClass)
 mycolors <- c("orange", "blue", "red", "darkgreen")
 
 plotct(dat, col = mycolors, profiles = "col")
+```
