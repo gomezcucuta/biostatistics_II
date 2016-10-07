@@ -2,6 +2,7 @@
 
 ## Exercise Regression Analysis by Example
 
+```{r}
 load("CHP.RData")
 
 dat <- P323
@@ -19,9 +20,11 @@ summary(log_model1)
 anova(log_model1, test = "Chisq")
 
 confint.default(log_model1)
+```
 
 ## Exercise Introductory Statistics with R (Chapter 13)
 
+```{r}
 # Enter the data
 
 no.yes <- c("No", "Yes")
@@ -133,3 +136,4 @@ prop.hyp
 fitted(glm.hyp)*n.tot
 
 data.frame(fit = round(fitted(glm.hyp)*n.tot), n.hyp, n.tot)
+```
