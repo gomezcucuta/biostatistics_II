@@ -1,6 +1,6 @@
 # Logistic Regression
 
-## Exercise Regression Analysis by Example
+## Exercise Regression Analysis by Example (P323)
 
 ```{r}
 load("CHP.RData")
@@ -20,6 +20,40 @@ summary(log_model1)
 anova(log_model1, test = "Chisq")
 
 confint.default(log_model1)
+```
+
+## Exercise Regression Analysis by Example (P344)
+
+```{r}
+dat <- read.csv("P344.csv", row.names = 1)
+
+str(dat)
+
+head(dat)
+
+attach(dat)
+
+p.model <- glm(D ~ P + M, family = poisson())
+
+summary(p.model)
+
+confint(p.model)
+
+anova(p.model, test = "Chisq")
+
+exp(p.model$coefficients)
+
+exp(confint(p.model))
+
+predicted.D <- round(predict(p.model, type = "response"))
+
+round(fitted(p.model))
+
+data.frame(dat$D, predicted.D)
+
+p.model$residuals
+
+plot(p.model)
 ```
 
 ## Exercise Introductory Statistics with R (Chapter 13)
