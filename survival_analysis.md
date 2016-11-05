@@ -41,7 +41,6 @@ plot(km_null_model, las = 1, xlab = "Time of remission in weeks", main = "Kaplan
 ## Kaplan-Meier Curves by Treatment
 
 ```{r, fig.align = 'center'}
-
 Yplacebo <- Y[leukemia$treatment==0]
 
 km_placebo <- survfit(Yplacebo ~ 1)
@@ -68,9 +67,15 @@ Treatment_Table
 
 km_by_treatment <- survfit(Y ~ leukemia$treatment)
 
+km_by_treatment
+
+summary(km_by_treatment)
+
 plot(km_by_treatment, las = 1, xlab = "Time of remission in weeks", main = "Kaplan-Meier Curves by Treatment", lty = 2:3)
 
 legend("topright", legend = c("Placebo", "Treatment"), lty = 2:3)
+
+survdiff(Y ~ leukemia$treatment)
 ```
 
 ## Kaplan-Meier Curves by Treatment including 95% Confidence Intervals
