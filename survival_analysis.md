@@ -11,19 +11,19 @@ head(leukemia); tail(leukemia)
 
 library(survival)
 
-Y <- Surv(leukemia$time, leukemia$status == 1)
+Y <- Surv(leukemia$time, leukemia$status == 1); Y
 
-null_model <- survfit(Y ~ 1)
+km_null_model <- survfit(Y ~ 1)
 
-null_model
+km_null_model
 
-summary(null_model)
+summary(km_null_model)
 
-names(null_model)
+names(km_null_model)
 
-Expanded_Table <- cbind(time = null_model$time, risk_set = null_model$n.risk, failures = null_model$n.event, censored = null_model$n.censor, survival = round(null_model$surv, 2))
+Expanded_Table <- cbind(time = km_null_model$time, risk_set = km_null_model$n.risk, failures = km_null_model$n.event, censored = km_null_model$n.censor, survival = round(km_null_model$surv, 2))
 
 Expanded_Table
 
-plot(null_model, las = 1, xlab = "Time of remission in weeks", main = "Kaplan-Meier Curve")
+plot(km_null_model, las = 1, xlab = "Time of remission in weeks", main = "Kaplan-Meier Curve")
 ```
