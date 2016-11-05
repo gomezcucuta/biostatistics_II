@@ -1,8 +1,18 @@
 # Survival Analysis
 
-*Data: Freireich et al., Blood, 1963.* 
+*Data: Freireich et al., Blood, 1963.*
 
-```{r}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Kaplan-Meier Curve
+
+```{r, fig.align = 'center'}
+rm(list=ls())
+
+setwd("~/Dropbox/Education/UNAL/wd_for_biostats_II")
+
 leukemia <- read.table("leukemia.dat", header = TRUE, skip = 6)
 
 str(leukemia)
@@ -26,4 +36,47 @@ Expanded_Table <- cbind(time = km_null_model$time, risk_set = km_null_model$n.ri
 Expanded_Table
 
 plot(km_null_model, las = 1, xlab = "Time of remission in weeks", main = "Kaplan-Meier Curve")
+```
+
+## Kaplan-Meier Curves by Treatment
+
+```{r, fig.align = 'center'}
+
+Yplacebo <- Y[leukemia$treatment==0]
+
+km_placebo <- survfit(Yplacebo ~ 1)
+
+km_placebo
+
+summary(km_placebo)
+
+Placebo_Table <- cbind(time = km_placebo$time, risk_set = km_placebo$n.risk, failures = km_placebo$n.event, censored = km_placebo$n.censor, survival = round(km_placebo$surv, 2))
+
+Placebo_Table
+
+Ytreatment <- Y[leukemia$treatment==1]
+
+km_treatment <- survfit(Ytreatment ~ 1)
+
+km_treatment
+
+summary(km_treatment)
+
+Treatment_Table <- cbind(time = km_treatment$time, risk_set = km_treatment$n.risk, failures = km_treatment$n.event, censored = km_treatment$n.censor, survival = round(km_treatment$surv, 2))
+
+Treatment_Table
+
+km_by_treatment <- survfit(Y ~ leukemia$treatment)
+
+plot(km_by_treatment, las = 1, xlab = "Time of remission in weeks", main = "Kaplan-Meier Curves by Treatment", lty = 2:3)
+
+legend("topright", legend = c("Placebo", "Treatment"), lty = 2:3)
+```
+
+## Kaplan-Meier Curves by Treatment including 95% Confidence Intervals
+
+```{r, fig.align = 'center'}
+plot(km_by_treatment, conf.int = "both", las = 1, xlab = "Time of remission in weeks", main = "Kaplan-Meier Curves by Treatment", lty = 2:3, col = c("red", "blue"))
+
+legend("topright", legend = c("Placebo", "Treatment"), lty = 2:3, col = c("red", "blue"))
 ```
