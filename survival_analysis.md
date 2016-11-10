@@ -85,3 +85,57 @@ plot(km_by_treatment, conf.int = "both", las = 1, xlab = "Time of remission in w
 
 legend("topright", legend = c("Placebo", "Treatment"), lty = 2:3, col = c("red", "blue"))
 ```
+
+## Cox PH Models
+
+```{r, fig.align = 'center'}
+leukemia$treatment <- leukemia$treatment + 1
+
+leukemia$treatment[leukemia$treatment == 2] <- 0
+
+table(leukemia$treatment)
+
+model1 <- coxph(Y ~ treatment, data = leukemia, method = "breslow")
+
+model1
+
+summary(model1)
+
+model2 <- coxph(Y ~ treatment + logwbc, data = leukemia, method = "breslow")
+
+model2
+
+summary(model2)
+
+model3 <- coxph(Y ~ treatment + logwbc + treatment*logwbc, data = leukemia, method = "breslow")
+
+model3
+
+summary(model3)
+
+names(model3)
+
+# Ho: Reduced model is adequate
+
+model3$loglik
+
+LRT_2v3 <- (-2)*(model2$loglik-model3$loglik)
+
+LRT_2v3
+
+P_Value <- 1 - pchisq(LRT_2v3, 1)
+
+P_Value
+
+# Fail to reject the null hypothesis
+
+LRT_1v2 <- (-2)*(model1$loglik-model2$loglik)
+
+LRT_1v2
+
+P_Value <- 1 - pchisq(LRT_1v2, 1)
+
+P_Value
+
+# Reject the null hypothesis
+```
