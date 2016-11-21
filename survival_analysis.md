@@ -73,9 +73,9 @@ km_by_treatment
 
 summary(km_by_treatment)
 
-plot(km_by_treatment, las = 1, xlab = "Time of remission in weeks", main = "Kaplan-Meier Curves by Treatment", lty = 2:3)
+plot(km_by_treatment, las = 1, xlab = "Time of remission in weeks", main = "Kaplan-Meier Curves by Treatment", lty = 2:3, col = c("red", "blue"))
 
-legend("topright", legend = c("Placebo", "Treatment"), lty = 2:3)
+legend("topright", legend = c("Placebo", "Treatment"), lty = 2:3, col = c("red", "blue"))
 
 survdiff(Y ~ leukemia$treatment)
 ```
@@ -121,13 +121,13 @@ names(model3)
 
 model3$loglik
 
-LRT_2v3 <- (-2)*(model2$loglik-model3$loglik); LRT_2v3
+LRT_2v3 <- (-2)*(model2$loglik[2]-model3$loglik[2]); LRT_2v3
 
 P_value <- 1 - pchisq(LRT_2v3, 1); P_value
 
 # Fail to reject the null hypothesis
 
-LRT_1v2 <- (-2)*(model1$loglik-model2$loglik); LRT_1v2
+LRT_1v2 <- (-2)*(model1$loglik[2]-model2$loglik[2]); LRT_1v2
 
 P_value <- 1 - pchisq(LRT_1v2, 1); P_value
 
